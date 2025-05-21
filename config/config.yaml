@@ -1,0 +1,16 @@
+app:
+  name: "Multi-Cam Face Tracker"
+  version: "1.0.0"
+  threshold: 0.6
+  screenshot_dir: "data/screenshots"
+  known_faces_dir: "data/known_faces"
+  database_path: "data/database.db"
+  alert_sound: "assets/alert.wav"
+  logo: "assets/logo.png"
+  log_dir: "logs"
+
+recognition:
+  detection_threshold: 0.5
+  recognition_threshold: 0.6
+  max_batch_size: 8
+  device: "cpu"  # or "cuda"

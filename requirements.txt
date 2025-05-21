@@ -1,0 +1,17 @@
+insightface==0.7.3
+torch>=2.0.0
+torchvision>=0.15.0
+numpy==1.24.3
+opencv-python>=4.5.0
+opencv-contrib-python>=4.5.0
+PyQt5>=5.15.0
+PyQt5-sip>=12.8.0
+pyyaml>=5.4.1
+scikit-learn>=1.0.0
+scipy>=1.7.0
+pillow>=9.0.0
+pygame>=2.0.0
+python-dotenv>=0.19.0
+loguru>=0.6.0
+qimage2ndarray>=1.10.0
+onnxruntime==1.15.1
