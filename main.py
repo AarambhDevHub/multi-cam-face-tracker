@@ -10,7 +10,7 @@ Features:
 - Event logging with timestamp and screenshot
 - User-friendly desktop UI built with PyQt5
 
-Author: Darshan Vichhi
+Author: Darshan Vichhi (Aarambh Dev Hub)
 Created: 2025-05-21
 """
 
