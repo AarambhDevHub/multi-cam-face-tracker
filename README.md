@@ -1,5 +1,7 @@
 # Multi-Camera Face Tracker System 🚀
 
+[](assets/logo.png)
+
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
 ![PyQt5](https://img.shields.io/badge/GUI-PyQt5-green)
 ![InsightFace](https://img.shields.io/badge/ML-InsightFace-orange)
