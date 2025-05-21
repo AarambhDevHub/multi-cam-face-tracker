@@ -1,6 +1,6 @@
 # Multi-Camera Face Tracker System 🚀
 
-[Logo](https://raw.githubusercontent.com/AarambhDevHub/multi-cam-face-tracker/refs/heads/main/assets/logo.png)
+![Logo](https://raw.githubusercontent.com/AarambhDevHub/multi-cam-face-tracker/refs/heads/main/assets/logo.png)
 
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
 ![PyQt5](https://img.shields.io/badge/GUI-PyQt5-green)
