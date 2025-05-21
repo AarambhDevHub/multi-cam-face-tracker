@@ -171,6 +171,13 @@ def main():
 
 
         logger.info("Application started successfully")
+        def on_close():
+            window.camera_manager.stop_all_cameras()
+            window.alert_system.shutdown()
+            app.quit()
+            
+        app.aboutToQuit.connect(on_close)
+
         sys.exit(app.exec_())
         
     except Exception as e:

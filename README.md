@@ -8,8 +8,10 @@
 ![PyQt5](https://img.shields.io/badge/GUI-PyQt5-green)
 ![InsightFace](https://img.shields.io/badge/ML-InsightFace-orange)
 ![OpenCV](https://img.shields.io/badge/Vision-OpenCV-red)
+![Telegram](https://img.shields.io/badge/Alerts-Telegram-blue)
 
-A robust real-time face tracking system with multi-camera support, facial recognition, and intelligent alerting capabilities.
+
+A robust real-time face tracking system with multi-camera support, facial recognition, and intelligent alerting capabilities including Telegram notifications.
 
 ## 🌟 Key Features
 
@@ -19,6 +21,7 @@ A robust real-time face tracking system with multi-camera support, facial recogn
 - **Face Recognition**: Identify known individuals with configurable confidence thresholds
 
 ### Alert System
+- ✨ **Telegram Notifications**: Get instant alerts with snapshots on your phone
 - 🔔 **Visual & Audio Alerts**: Customizable popups and sound notifications
 - 📸 **Automatic Evidence Capture**: Saves screenshots of recognition events
 - 📊 **Comprehensive Logging**: Detailed event records with timestamps and confidence levels
@@ -38,6 +41,8 @@ A robust real-time face tracking system with multi-camera support, facial recogn
 | GUI Framework           | PyQt5                    |
 | Database                | SQLite                   |
 | Audio Alerts            | Pygame                   |
+| Telegram Alerts         | python-telegram-bot      |
+| **Alert Channels**      | Telegram Bot             |
 
 ## 📦 Installation Guide
 
@@ -113,6 +118,23 @@ cameras:
     fps: 30
     rotate: 0 # Degrees (0,90,180,270)
 ```
+
+## ⚙️ Telegram Configuration
+### Add to `config/config.yaml`:
+```yaml
+telegram:
+  enabled: true
+  bot_token: "YOUR_BOT_TOKEN"  # From @BotFather
+  chat_id: "YOUR_CHAT_ID"      # Get from @getidsbot
+  rate_limit: 30  # Seconds between alerts
+```
+## Setup Guide:
+- Create bot with @BotFather
+- Get chat ID with @getidsbot
+- Add bot to your alert channel as admin
+- Enable in config and restart app
+
+
 
 ## 🖥️ User Manual
 ### Adding Known Faces

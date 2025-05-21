@@ -9,6 +9,8 @@ import numpy as np
 from pathlib import Path
 from pygame import mixer
 
+from .telegram_manager import TelegramManager
+
 # The `@dataclass` decorator in Python is used to automatically generate special methods such as
 # `__init__`, `__repr__`, `__eq__`, and `__hash__` for a class. In this specific case, the
 # `AlertEvent` class is a data class that represents an alert event with the following attributes:
@@ -30,6 +32,13 @@ class AlertSystem:
         self.alert_history: List[AlertEvent] = []
         self.alert_enabled = True
         self.screenshot_enabled = True
+        self.telegram = None
+        if config.get('telegram', {}).get('enabled', False):
+            self.telegram = TelegramManager(
+                config['telegram']['bot_token'],
+                config['telegram']['chat_id'],
+                config['telegram']['rate_limit']
+            )
         mixer.init()  # Add this at the start of your application
 
         
@@ -53,6 +62,18 @@ class AlertSystem:
         logger.debug(f"Event created with screenshot path: {event.screenshot_path}")  # Debug log
         self.alert_history.append(event)
         
+        if self.telegram:
+            message = (f"🚨 Face detected!\n"
+                      f"👤 Name: {face_name}\n"
+                      f"📷 Camera: {camera_name}\n"
+                      f"🎯 Confidence: {confidence:.2%}\n"
+                      f"⏰ Time: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+            
+            self.telegram.send_alert(
+                message=message,
+                image_path=screenshot_path
+            )
+
         if self.alert_enabled:
             self._play_alert_sound()
             
@@ -112,3 +133,8 @@ class AlertSystem:
         """Enable or disable screenshot capture"""
         self.screenshot_enabled = enabled
         logger.info(f"Screenshots {'enabled' if enabled else 'disabled'}")
+    
+    def shutdown(self):
+        """Cleanup alert system resources"""
+        if hasattr(self, 'telegram') and self.telegram:
+            self.telegram.shutdown()

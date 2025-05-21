@@ -14,3 +14,9 @@ recognition:
   recognition_threshold: 0.6
   max_batch_size: 8
   device: "cpu"  # or "cuda"
+
+telegram:
+  enabled: true
+  bot_token: "YOUR_BOT_TOKEN"  # From @BotFather
+  chat_id: "YOUR_CHAT_ID"      # Get from @getidsbot
+  rate_limit: 30
