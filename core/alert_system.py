@@ -10,6 +10,7 @@ from pathlib import Path
 from pygame import mixer
 
 from .telegram_manager import TelegramManager
+from .face_detection import Face
 
 # The `@dataclass` decorator in Python is used to automatically generate special methods such as
 # `__init__`, `__repr__`, `__eq__`, and `__hash__` for a class. In this specific case, the
@@ -21,6 +22,8 @@ class AlertEvent:
     face_name: str
     confidence: float
     timestamp: float
+    age: Optional[int] = None
+    gender: Optional[str] = None  # 'Male' or 'Female'
     screenshot_path: Optional[str] = None
 
 class AlertSystem:
@@ -42,7 +45,7 @@ class AlertSystem:
         mixer.init()  # Add this at the start of your application
 
         
-    def trigger_alert(self, camera_id: int, camera_name: str, face_name: str, confidence: float, frame: np.ndarray) -> AlertEvent:
+    def trigger_alert(self, camera_id: int, camera_name: str, face_name: str, face: Face, confidence: float, frame: np.ndarray) -> AlertEvent:
         """Trigger an alert for a recognized face"""
         timestamp = time.time()
         screenshot_path = None
@@ -55,27 +58,41 @@ class AlertSystem:
             camera_id=camera_id,
             camera_name=camera_name,
             face_name=face_name,
+            age=face.age,
+            gender=face.gender,
             confidence=confidence,
             timestamp=timestamp,
             screenshot_path=str(screenshot_path) if screenshot_path is not None else None
         )
         logger.debug(f"Event created with screenshot path: {event.screenshot_path}")  # Debug log
         self.alert_history.append(event)
+
+        if self.alert_enabled:
+            self._play_alert_sound()
         
         if self.telegram:
-            message = (f"🚨 Face detected!\n"
-                      f"👤 Name: {face_name}\n"
-                      f"📷 Camera: {camera_name}\n"
-                      f"🎯 Confidence: {confidence:.2%}\n"
-                      f"⏰ Time: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+            message_lines = [
+                "🚨 Face detected!",
+                f"👤 Name: {face_name}"
+            ]
+
+            if face.age:
+                message_lines.append(f"👶 Age: ~{face.age} years")
+            if face.gender:
+                message_lines.append(f"🚻 Gender: {face.gender}")
+                
+            message_lines.extend([
+                f"📷 Camera: {camera_name}",
+                f"🎯 Confidence: {confidence:.2%}",
+                f"⏰ Time: {time.strftime('%Y-%m-%d %H:%M:%S')}"
+            ])
+
+            message = "\n".join(message_lines)
             
             self.telegram.send_alert(
                 message=message,
                 image_path=screenshot_path
             )
-
-        if self.alert_enabled:
-            self._play_alert_sound()
             
         logger.info(f"Alert triggered: {face_name} detected on {camera_name} with confidence {confidence:.2f}")
         return event

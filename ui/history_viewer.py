@@ -216,6 +216,8 @@ class HistoryViewer(QWidget):
                 f"<b>Time:</b> {time_str}<br>"
                 f"<b>Camera:</b> {entry.camera_name} (ID: {entry.camera_id})<br>"
                 f"<b>Face:</b> {entry.face_name}<br>"
+                f"<b>Age:</b> {entry.age if entry.age else 'N/A'}<br>"
+                f"<b>Gender:</b> {entry.gender if entry.gender else 'N/A'}<br>"
                 f"<b>Confidence:</b> {confidence_str}<br>"
             )
             self.details_label.setText(details_text)

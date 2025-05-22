@@ -17,6 +17,8 @@ class Face:
     kps: np.ndarray   # 5 key points
     det_score: float  # detection score
     embedding: np.ndarray
+    age: Optional[int] = None
+    gender: Optional[str] = None  # 'Male' or 'Female'
     face_img: Optional[np.ndarray] = None
 
 @dataclass
@@ -32,7 +34,7 @@ class FaceDetector:
         self.detection_threshold = config['recognition']['detection_threshold']
         self.max_batch_size = config['recognition']['max_batch_size']
         self.device = config['recognition']['device']
-        
+        self.analysis_enabled = config['recognition'].get('analysis_enabled', True)
         self.model = self._load_model()
         self.known_faces: List[KnownFace] = []
         
@@ -42,7 +44,7 @@ class FaceDetector:
             model = FaceAnalysis(
                 name='buffalo_l',
                 root='./models',
-                allowed_modules=['detection', 'recognition']
+                allowed_modules=['detection', 'recognition', 'genderage']
             )
             model.prepare(
                 ctx_id=0 if self.device == 'cuda' else -1,
@@ -103,13 +105,21 @@ class FaceDetector:
         """Detect faces in an image"""
         try:
             faces = self.model.get(image)
-            return [Face(
-                bbox=face.bbox,
-                kps=face.kps,
-                det_score=face.det_score,
-                embedding=face.embedding,
-                face_img=self._extract_face_image(image, face.bbox)
-            ) for face in faces]
+            results = []
+            
+            for face in faces:
+                face_img = self._extract_face_image(image, face.bbox)
+
+                results.append(Face(
+                    bbox=face.bbox,
+                    kps=face.kps,
+                    det_score=face.det_score,
+                    embedding=face.embedding,
+                    age=self._get_age(face),
+                    gender=self._get_gender(face),
+                    face_img=face_img
+                ))
+            return results
         except Exception as e:
             logger.error(f"Error detecting faces: {e}")
             return []
@@ -194,3 +204,19 @@ class FaceDetector:
         except Exception as e:
             logger.error(f"Error adding known face: {e}")
             return False
+    
+
+    def _get_age(self, face) -> Optional[int]:
+        """Extract age estimation if available"""
+        if not self.analysis_enabled:
+            return None
+        return int(face.age) if hasattr(face, 'age') else None
+    
+
+    def _get_gender(self, face) -> Optional[str]:
+        """Extract gender prediction if available"""
+        if not self.analysis_enabled:
+            return None
+        if not hasattr(face, 'sex') or face.sex is None:
+            return None
+        return 'Female' if np.argmax(face.sex) == 1 else 'Male'

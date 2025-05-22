@@ -12,6 +12,8 @@ class FaceLogEntry:
     camera_id: int
     camera_name: str
     face_name: str
+    age: Optional[int]
+    gender: Optional[str]
     confidence: float
     screenshot_path: Optional[str]
 
@@ -43,6 +45,8 @@ class FaceDatabase:
                         camera_id INTEGER NOT NULL,
                         camera_name TEXT NOT NULL,
                         face_name TEXT NOT NULL,
+                        age INTEGER,
+                        gender TEXT,
                         confidence REAL NOT NULL,
                         screenshot_path TEXT
                     )
@@ -73,13 +77,16 @@ class FaceDatabase:
                 cursor = conn.cursor()
                 cursor.execute('''
                     INSERT INTO face_logs (
-                        timestamp, camera_id, camera_name, face_name, confidence, screenshot_path
-                    ) VALUES (?, ?, ?, ?, ?, ?)
+                        timestamp, camera_id, camera_name, face_name,
+                        age, gender, confidence, screenshot_path
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 ''', (
                     float(event.timestamp),
                     int(event.camera_id),
                     str(event.camera_name),
                     str(event.face_name),
+                    int(event.age) if event.age else None,
+                    str(event.gender) if event.gender else None,
                     float(event.confidence),
                     str(event.screenshot_path) if event.screenshot_path else None
                 ))
@@ -98,7 +105,7 @@ class FaceDatabase:
         """Retrieve face logs with optional filters"""
         try:
             query = '''
-                SELECT id, timestamp, camera_id, camera_name, face_name, confidence, screenshot_path
+                SELECT id, timestamp, camera_id, camera_name, face_name, age, gender, confidence, screenshot_path
                 FROM face_logs
             '''
             params = []
@@ -141,6 +148,8 @@ class FaceDatabase:
                             camera_id=row['camera_id'],
                             camera_name=row['camera_name'],
                             face_name=row['face_name'],
+                            age=row['age'],
+                            gender=row['gender'],
                             confidence=float(row['confidence']),
                             screenshot_path=row['screenshot_path']
                         ))

@@ -9,6 +9,8 @@ def draw_face_info(image: np.ndarray,
                   face_bbox: Tuple[int, int, int, int],
                   name: Optional[str] = None,
                   confidence: Optional[float] = None,
+                  age: Optional[int] = None,
+                  gender: Optional[str] = None,
                   camera_name: Optional[str] = None,
                   timestamp: Optional[float] = None) -> np.ndarray:
     """
@@ -28,6 +30,10 @@ def draw_face_info(image: np.ndarray,
             info_text.append(f"Name: {name}")
         if confidence is not None:
             info_text.append(f"Confidence: {confidence:.2f}")
+        if age:
+            info_text.append(f"Age: {age}")
+        if gender:
+            info_text.append(f"Gender: {gender}")
         if camera_name:
             info_text.append(f"Camera: {camera_name}")
         if timestamp:

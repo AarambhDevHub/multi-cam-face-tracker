@@ -368,13 +368,15 @@ class MainWindow(QMainWindow):
                         name=known_face.name,
                         confidence=confidence,
                         camera_name=camera_name,
+                        age=face.age,
+                        gender=face.gender,
                         timestamp=time.time()
                     )
                     
                     # Trigger alert
                     alert_event = self.alert_system.trigger_alert(
                         cam_id, camera_name,
-                        known_face.name, confidence,
+                        known_face.name, face, confidence,
                         frame
                     )
                     alert_triggered = True

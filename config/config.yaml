@@ -14,6 +14,9 @@ recognition:
   recognition_threshold: 0.6
   max_batch_size: 8
   device: "cpu"  # or "cuda"
+  analysis_enabled: true  # Enable age/gender/emotion
+  age_estimation: true
+  gender_detection: true
 
 telegram:
   enabled: true

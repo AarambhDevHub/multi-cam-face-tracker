@@ -11,7 +11,7 @@
 ![Telegram](https://img.shields.io/badge/Alerts-Telegram-blue)
 
 
-A robust real-time face tracking system with multi-camera support, facial recognition, and intelligent alerting capabilities including Telegram notifications.
+A robust real-time face tracking system with multi-camera support, facial recognition, age & gender detection, and intelligent alerting capabilities including Telegram notifications.
 
 ## 🌟 Key Features
 
@@ -19,6 +19,7 @@ A robust real-time face tracking system with multi-camera support, facial recogn
 - **Multi-Camera Support**: Simultaneously monitor multiple video sources (webcams, RTSP streams, video files)
 - **Real-Time Face Detection**: Powered by InsightFace with GPU acceleration support
 - **Face Recognition**: Identify known individuals with configurable confidence thresholds
+- **Age & Gender Detection**: Estimate demographic attributes for each detected face
 
 ### Alert System
 - ✨ **Telegram Notifications**: Get instant alerts with snapshots on your phone
@@ -33,16 +34,17 @@ A robust real-time face tracking system with multi-camera support, facial recogn
 
 ## 🛠️ Technical Stack
 
-| Component               | Technology Used          |
-|-------------------------|--------------------------|
-| Face Detection          | InsightFace              |
-| Machine Learning        | PyTorch                  |
-| Computer Vision         | OpenCV                   |
-| GUI Framework           | PyQt5                    |
-| Database                | SQLite                   |
-| Audio Alerts            | Pygame                   |
-| Telegram Alerts         | python-telegram-bot      |
-| **Alert Channels**      | Telegram Bot             |
+| Component               | Technology Used               |
+|-------------------------|-------------------------------|
+| Face Detection          | InsightFace                   |
+| Machine Learning        | PyTorch                       |
+| Computer Vision         | OpenCV                        |
+| GUI Framework           | PyQt5                         |
+| Database                | SQLite                        |
+| Audio Alerts            | Pygame                        |
+| Telegram Alerts         | python-telegram-bot           |
+| **Alert Channels**      | Telegram Bot                  |
+| Demographics            | Age & Gender via InsightFace  |
 
 ## 📦 Installation Guide
 
@@ -103,6 +105,8 @@ recognition:
   recognition_threshold: 0.6
   max_batch_size: 8
   device: "cpu"  # or "cuda"
+  age_estimation: true
+  gender_detection: true
 ```
 
 ### Camera Configuration (`config/camera_config.yaml`)
@@ -152,6 +156,7 @@ telegram:
 - Configure sound preferences in Alert Panel
 - Set minimum confidence threshold (0.5-1.0)
 - Enable/disable screenshot capture
+- View age and gender next to each recognized face
 
 ## 🚀 Performance Tips
 1. For RTSP Streams:
