@@ -18,16 +18,8 @@ recognition:
   age_estimation: true
   gender_detection: true
 
-# telegram:
-#   enabled: true
-#   bot_token: "YOUR_BOT_TOKEN"  # From @BotFather
-#   chat_id: "YOUR_CHAT_ID"      # Get from @getidsbot
-#   rate_limit: 30
-
-
-
 telegram:
-  enabled: false
-  bot_token: "7148705634:AAEZHCbuw1B5KQkHm28T-kB8qcxWIHnhkUQ"  # From @BotFather
-  chat_id: "7282607222"      # Get from @getidsbot
+  enabled: true
+  bot_token: "YOUR_BOT_TOKEN"  # From @BotFather
+  chat_id: "YOUR_CHAT_ID"      # Get from @getidsbot
   rate_limit: 30
