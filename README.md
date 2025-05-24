@@ -138,7 +138,10 @@ telegram:
 - Add bot to your alert channel as admin
 - Enable in config and restart app
 
-
+## 🔍 Learn More on DeepWiki
+Want to dive deeper into how this system works, including architecture insights and real-world deployment tips?
+📖 Explore the project on DeepWiki:
+👉 [https://deepwiki.com/AarambhDevHub/multi-cam-face-tracker](https://deepwiki.com/AarambhDevHub/multi-cam-face-tracker)
 
 ## 🖥️ User Manual
 ### Adding Known Faces
