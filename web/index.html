@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Camera Face Tracker v0</title>
+    <meta name="description" content="An AI-powered real-time facial recognition system with multi-camera support, age & gender detection, and Telegram alerts">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <a href="#" class="logo">
+                    <img src="https://raw.githubusercontent.com/AarambhDevHub/multi-cam-face-tracker/main/assets/logo.png" alt="Logo" class="logo-img">
+                    <span class="logo-text">Multi-Cam Face Tracker</span>
+                </a>
+
+                <nav class="nav-links">
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="https://deepwiki.com/AarambhDevHub/multi-cam-face-tracker" class="nav-link">Documentation</a>
+                    <a href="https://discord.gg/HDth6PfCnp" class="nav-link">Community</a>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <a href="https://github.com/AarambhDevHub/multi-cam-face-tracker" class="btn btn-outline btn-sm">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                </nav>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fab fa-github"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="hero-title-line">AI-Powered</span>
+                        <span class="hero-title-gradient">Multi-Camera Face Tracker</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        An AI-powered real-time facial recognition system with multi-camera support, age & gender detection, and
+                        Telegram alerts — built using InsightFace, PyQt5, and OpenCV.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="https://github.com/AarambhDevHub/multi-cam-face-tracker" class="btn btn-primary btn-lg">
+                            <i class="fab fa-github"></i>
+                            GitHub Repository
+                        </a>
+                        <a href="https://deepwiki.com/AarambhDevHub/multi-cam-face-tracker" class="btn btn-outline btn-lg">
+                            <i class="fas fa-external-link-alt"></i>
+                            Documentation
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <div class="app-window">
+                        <div class="window-header">
+                            <div class="window-controls">
+                                <div class="control red"></div>
+                                <div class="control yellow"></div>
+                                <div class="control green"></div>
+                            </div>
+                        </div>
+                        <img src="https://raw.githubusercontent.com/AarambhDevHub/multi-cam-face-tracker/main/assets/logo.png" alt="Multi-Camera Face Tracker UI" class="app-screenshot">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Powerful Features</h2>
+                    <p class="section-description">Advanced capabilities for real-time facial recognition and tracking</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card" data-delay="0">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3 class="feature-title">Multi-Camera Real-Time Tracking</h3>
+                        <p class="feature-description">Connect and monitor multiple camera feeds simultaneously with real-time processing</p>
+                    </div>
+
+                    <div class="feature-card" data-delay="100">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="feature-title">Face Recognition + Demographics</h3>
+                        <p class="feature-description">Identify faces and detect age & gender in real-time with high accuracy</p>
+                    </div>
+
+                    <div class="feature-card" data-delay="200">
+                        <div class="feature-icon">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <h3 class="feature-title">Live Dashboard UI</h3>
+                        <p class="feature-description">Intuitive interface for monitoring and control with real-time updates</p>
+                    </div>
+
+                    <div class="feature-card" data-delay="300">
+                        <div class="feature-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h3 class="feature-title">Telegram Alert Integration</h3>
+                        <p class="feature-description">Receive instant notifications when faces are detected or events occur</p>
+                    </div>
+
+                    <div class="feature-card" data-delay="400">
+                        <div class="feature-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 class="feature-title">SQLite Logging & Evidence</h3>
+                        <p class="feature-description">Store detection events and capture evidence automatically for review</p>
+                    </div>
+
+                    <div class="feature-card" data-delay="500">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="feature-title">AI-Powered Analysis</h3>
+                        <p class="feature-description">Leverage advanced AI models for accurate face detection and analysis</p>
+                    </div>
+
+                    <div class="feature-card" data-delay="600">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Event Monitoring</h3>
+                        <p class="feature-description">Track and log events with timestamps and relevant metadata</p>
+                    </div>
+
+                    <div class="feature-card" data-delay="700">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="feature-title">Open Source & Extensible</h3>
+                        <p class="feature-description">Easily extend functionality with the open-source codebase</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preview Section -->
+        <section class="preview">
+            <div class="container">
+                <div class="preview-grid">
+                    <div class="preview-content">
+                        <h2 class="preview-title">
+                            Advanced AI-Driven <br>
+                            <span class="text-gradient">Surveillance System</span>
+                        </h2>
+                        <p class="preview-description">
+                            Multi-Camera Face Tracker provides a comprehensive solution for real-time facial recognition and
+                            monitoring across multiple camera feeds. The system is designed to be both powerful and user-friendly.
+                        </p>
+                        <ul class="preview-list">
+                            <li class="preview-item">
+                                <i class="fas fa-chevron-right"></i>
+                                Real-time face detection and recognition
+                            </li>
+                            <li class="preview-item">
+                                <i class="fas fa-chevron-right"></i>
+                                Age and gender estimation
+                            </li>
+                            <li class="preview-item">
+                                <i class="fas fa-chevron-right"></i>
+                                Multi-camera support for comprehensive coverage
+                            </li>
+                            <li class="preview-item">
+                                <i class="fas fa-chevron-right"></i>
+                                Instant alerts via Telegram integration
+                            </li>
+                            <li class="preview-item">
+                                <i class="fas fa-chevron-right"></i>
+                                Detailed logging and evidence capture
+                            </li>
+                        </ul>
+                        <div class="preview-buttons">
+                            <a href="https://github.com/AarambhDevHub/multi-cam-face-tracker" class="btn btn-primary">
+                                <i class="fab fa-github"></i>
+                                Get Started
+                            </a>
+                            <a href="https://deepwiki.com/AarambhDevHub/multi-cam-face-tracker" class="btn btn-outline">
+                                <i class="fas fa-external-link-alt"></i>
+                                Documentation
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="preview-image">
+                        <div class="preview-window">
+                            <div class="window-header">
+                                <div class="window-controls">
+                                    <div class="control red"></div>
+                                    <div class="control yellow"></div>
+                                    <div class="control green"></div>
+                                </div>
+                            </div>
+                            <img src="https://raw.githubusercontent.com/AarambhDevHub/multi-cam-face-tracker/main/assets/logo.png" alt="Multi-Camera Face Tracker UI" class="preview-screenshot">
+                        </div>
+                        <div class="glow glow-1"></div>
+                        <div class="glow glow-2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-glow"></div>
+                    <h2 class="cta-title">Join Our Community</h2>
+                    <p class="cta-description">Get help, share your experience, and contribute to the project</p>
+                    <div class="cta-buttons">
+                        <a href="https://discord.gg/HDth6PfCnp" class="btn btn-primary btn-lg">
+                            <i class="fab fa-discord"></i>
+                            Join our Discord
+                        </a>
+                        <a href="https://buymeacoffee.com/aarambhdevhub" class="btn btn-outline btn-lg">
+                            <i class="fas fa-coffee"></i>
+                            Buy Me a Coffee
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="https://raw.githubusercontent.com/AarambhDevHub/multi-cam-face-tracker/main/assets/logo.png" alt="Logo" class="footer-logo">
+                    <span class="footer-brand-text">Multi-Camera Face Tracker</span>
+                </div>
+
+                <p class="footer-copyright">
+                    © 2024 Multi-Camera Face Tracker. All rights reserved.
+                </p>
+
+                <div class="footer-links">
+                    <a href="https://github.com/AarambhDevHub/multi-cam-face-tracker" class="footer-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://deepwiki.com/AarambhDevHub/multi-cam-face-tracker" class="footer-link">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <a href="https://discord.gg/HDth6PfCnp" class="footer-link">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="https://buymeacoffee.com/aarambhdevhub" class="footer-link">
+                        <i class="fas fa-coffee"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
