@@ -1,4 +1,4 @@
-name: Deploy static content to Pages from /web folder
+name: Deploy Web Folder to GitHub Pages
 
 on:
   push:
@@ -10,38 +10,38 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-        
-      - name: Move web folder to root
+
+      - name: Verify web folder exists
         run: |
-          # Remove everything except the web folder and .git folder
-          shopt -s extglob
-          rm -rf !(web|.git)
-          # Move contents of web folder to root
-          mv web/* .
-          rm -rf web
-          
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        
+          if [ ! -d "web" ]; then
+            echo "❌ Error: web folder not found!"
+            ls -la
+            exit 1
+          fi
+
+      - name: Prepare deployment
+        run: |
+          # Create temporary deployment folder
+          mkdir -p deployment
+          # Copy only web folder contents
+          cp -R web/* deployment/
+          echo "Contents to deploy:"
+          ls -la deployment/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Now the root contains what was in /web
-          path: '.'
-          
+          path: 'deployment'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
